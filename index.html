@@ -1,0 +1,1894 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Kaliyodam | A Mallu Food Boat in Bengaluru</title>
+    
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700;0,900;1,400;1,700&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+    
+    <style>
+        :root {
+            /* Color Palette */
+            --forest-green: #1a3a2a;
+            --warm-amber: #c8860a;
+            --cream: #f5efe0;
+            --wood-brown: #4a2c0a;
+            --coral-red: #d64309;
+            --dark-overlay: rgba(26, 58, 42, 0.85);
+
+            /* Typography */
+            --font-headings: 'Playfair Display', serif;
+            --font-body: 'Inter', sans-serif;
+
+            /* Spacing */
+            --section-padding: 6rem 5%;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: var(--font-body);
+            background-color: var(--cream);
+            color: var(--wood-brown);
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+
+        /* Typography Styles */
+        h1, h2, h3, h4, .serif {
+            font-family: var(--font-headings);
+            color: var(--forest-green);
+        }
+
+        /* Malayalam Accent */
+        .malayalam-accent {
+            position: absolute;
+            font-size: 10rem;
+            color: rgba(26, 58, 42, 0.03);
+            font-family: sans-serif; /* fallback for malayalam */
+            z-index: 0;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            white-space: nowrap;
+            pointer-events: none;
+            user-select: none;
+        }
+
+        /* Buttons */
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            padding: 1rem 2rem;
+            font-family: var(--font-headings);
+            font-size: 1.1rem;
+            font-weight: 600;
+            text-decoration: none;
+            border-radius: 4px;
+            transition: all 0.3s ease;
+            cursor: pointer;
+            border: 2px solid transparent;
+        }
+
+        .btn-primary {
+            background-color: var(--warm-amber);
+            color: var(--forest-green);
+        }
+
+        .btn-primary:hover {
+            background-color: #e0960d;
+            transform: translateY(-2px);
+            box-shadow: 0 10px 20px rgba(200, 134, 10, 0.2);
+        }
+
+        .btn-ghost {
+            background-color: transparent;
+            color: var(--cream);
+            border-color: var(--cream);
+        }
+
+        .btn-ghost-dark {
+            background-color: transparent;
+            color: var(--forest-green);
+            border-color: var(--forest-green);
+        }
+
+        .btn-ghost:hover {
+            background-color: rgba(245, 239, 224, 0.1);
+            transform: translateY(-2px);
+        }
+        
+        .btn-ghost-dark:hover {
+            background-color: rgba(26, 58, 42, 0.05);
+            transform: translateY(-2px);
+        }
+
+        /* Navbar */
+        .navbar {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            padding: 1.5rem 5%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            z-index: 1000;
+            transition: all 0.4s ease;
+        }
+
+        .navbar.scrolled {
+            background-color: var(--forest-green);
+            padding: 1rem 5%;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.1);
+        }
+
+        .nav-brand {
+            font-family: var(--font-headings);
+            font-size: 1.8rem;
+            font-weight: 700;
+            color: var(--cream);
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 2rem;
+        }
+
+        .nav-links a {
+            color: var(--cream);
+            text-decoration: none;
+            font-size: 0.95rem;
+            font-weight: 500;
+            letter-spacing: 0.5px;
+            position: relative;
+        }
+
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background-color: var(--warm-amber);
+            transition: width 0.3s ease;
+        }
+
+        .nav-links a:hover::after {
+            width: 100%;
+        }
+
+        /* Hamburger Menu (Mobile) */
+        .menu-toggle {
+            display: none;
+            cursor: pointer;
+            flex-direction: column;
+            gap: 5px;
+        }
+        .menu-toggle span {
+            display: block;
+            width: 25px;
+            height: 3px;
+            background-color: var(--cream);
+            transition: all 0.3s ease;
+        }
+
+        /* Hero Section */
+        .hero {
+            height: 100vh;
+            min-height: 600px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+            overflow: hidden;
+            text-align: center;
+            padding: 0 5%;
+        }
+
+        /* Subtle water ripple background */
+        .hero-bg {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: 
+                linear-gradient(to right, rgba(26, 58, 42, 0.98) 0%, rgba(26, 58, 42, 0.8) 40%, rgba(13, 29, 21, 0.4) 100%),
+                url('hero-bg.jpg');
+            background-size: cover;
+            background-position: center;
+            z-index: -2;
+        }
+
+        .hero-ripple {
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: 
+                radial-gradient(circle at 50% 50%, rgba(200, 134, 10, 0.15) 0%, transparent 40%),
+                radial-gradient(circle at 80% 20%, rgba(26, 58, 42, 0.4) 0%, transparent 30%);
+            animation: waterRipple 15s ease-in-out infinite alternate;
+            z-index: -1;
+            opacity: 0.8;
+            mix-blend-mode: color-dodge;
+        }
+
+        @keyframes waterRipple {
+            0% { transform: scale(1) translate(0, 0); }
+            50% { transform: scale(1.05) translate(-2%, 3%); }
+            100% { transform: scale(1) translate(2%, -2%); }
+        }
+
+        .hero-container {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            max-width: 1200px;
+            width: 100%;
+            z-index: 10;
+            gap: 4rem;
+        }
+
+        .hero-content {
+            flex: 1;
+            text-align: left;
+        }
+
+        .hero-subtitle {
+            font-size: 1rem;
+            text-transform: uppercase;
+            letter-spacing: 3px;
+            color: var(--warm-amber);
+            margin-bottom: 1.5rem;
+            font-weight: 500;
+        }
+
+        .hero h1 {
+            font-size: 5.5rem;
+            color: var(--cream);
+            margin-bottom: 1rem;
+            line-height: 1.1;
+            text-shadow: 0 10px 30px rgba(0,0,0,0.3);
+        }
+
+        .hero p {
+            font-size: 1.2rem;
+            color: rgba(245, 239, 224, 0.85);
+            margin-bottom: 2.5rem;
+            font-weight: 300;
+        }
+
+        .hero-cta {
+            display: flex;
+            gap: 1rem;
+            justify-content: flex-start;
+        }
+
+        .hero-images {
+            flex: 1.2;
+            position: relative;
+            height: 500px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        .hero-img-card {
+            position: absolute;
+            background: white;
+            padding: 10px 10px 30px 10px;
+            border-radius: 4px;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.4);
+            transition: all 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            cursor: pointer;
+        }
+        
+        .hero-img-card img {
+            width: 200px;
+            height: 250px;
+            object-fit: cover;
+            border-radius: 2px;
+            background: #e0e0e0;
+        }
+        
+        .img-1 {
+            top: -10px;
+            left: -40px;
+            transform: rotate(-10deg);
+            z-index: 2;
+        }
+        
+        .img-2 {
+            top: 60px;
+            right: -30px;
+            transform: rotate(14deg);
+            z-index: 3;
+        }
+        
+        .img-3 {
+            bottom: -20px;
+            left: 130px;
+            transform: rotate(-3deg);
+            z-index: 4;
+        }
+        
+        .hero-img-card:hover {
+            transform: scale(1.1) rotate(0deg);
+            z-index: 10;
+            box-shadow: 0 25px 50px rgba(0,0,0,0.5);
+        }
+
+        @media (max-width: 992px) {
+            .hero-container {
+                flex-direction: column;
+                text-align: center;
+                gap: 2rem;
+                padding-top: 80px;
+            }
+            .hero-content {
+                text-align: center;
+            }
+            .hero-cta {
+                justify-content: center;
+            }
+            .hero h1 { font-size: 4rem; }
+            .hero-images {
+                width: 100%;
+                height: 350px;
+            }
+            .hero-img-card img {
+                width: 140px;
+                height: 180px;
+            }
+            .img-1 { top: 0; left: auto; right: 40%; }
+            .img-2 { top: 60px; right: 10%; }
+            .img-3 { bottom: 20px; left: 10%; }
+        }
+
+        .floating-badge {
+            position: absolute;
+            bottom: 2rem;
+            right: 2rem;
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+            padding: 0.8rem 1.5rem;
+            border-radius: 50px;
+            border: 1px solid rgba(255,255,255,0.2);
+            color: var(--cream);
+            font-size: 0.9rem;
+            font-weight: 500;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+            animation: float 4s ease-in-out infinite;
+        }
+
+        @keyframes float {
+            0% { transform: translateY(0); }
+            50% { transform: translateY(-10px); }
+            100% { transform: translateY(0); }
+        }
+
+        /* Section Headers */
+        .section-header {
+            text-align: center;
+            margin-bottom: 4rem;
+            position: relative;
+        }
+        
+        .section-header h2 {
+            font-size: 3rem;
+            color: var(--forest-green);
+        }
+
+        .section-header p {
+            color: var(--coral-red);
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            font-size: 0.85rem;
+            margin-bottom: 0.5rem;
+        }
+
+        /* About Section */
+        .about {
+            padding: var(--section-padding);
+            position: relative;
+            background-color: var(--cream);
+        }
+
+        .about-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            align-items: center;
+            gap: 4rem;
+            position: relative;
+            z-index: 1;
+        }
+
+        .about-image {
+            flex: 1;
+            position: relative;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        /* Abstract SVG Boat illustration */
+        .svg-illustration {
+            width: 100%;
+            max-width: 450px;
+            height: auto;
+        }
+
+        .about-content {
+            flex: 1;
+        }
+
+        .about-content h2 {
+            font-size: 3rem;
+            margin-bottom: 1.5rem;
+            line-height: 1.2;
+        }
+
+        .about-content p {
+            font-size: 1.1rem;
+            margin-bottom: 1.5rem;
+            color: var(--wood-brown);
+        }
+
+        .stat-card {
+            display: inline-flex;
+            align-items: center;
+            gap: 1rem;
+            background-color: white;
+            padding: 1rem 1.5rem;
+            border-radius: 8px;
+            box-shadow: 0 10px 30px rgba(74, 44, 10, 0.08);
+            border-left: 4px solid var(--warm-amber);
+            margin-top: 2rem;
+        }
+
+        .stat-card strong {
+            font-size: 1.5rem;
+            font-family: var(--font-headings);
+            color: var(--forest-green);
+            line-height: 1;
+        }
+        
+        .stat-card span {
+            font-size: 0.85rem;
+            color: var(--wood-brown);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            font-weight: 600;
+        }
+
+        /* Menu Highlights */
+        .menu {
+            padding: var(--section-padding);
+            background-color: #fcfbfa; /* Slight variation of cream */
+            position: relative;
+            overflow: hidden;
+        }
+
+        .menu-carousel {
+            display: flex;
+            gap: 2rem;
+            overflow-x: auto;
+            padding: 2rem 5%;
+            margin: 0 -5%;
+            scroll-snap-type: x mandatory;
+            scrollbar-width: none; /* Firefox */
+            -ms-overflow-style: none;  /* Internet Explorer 10+ */
+        }
+        
+        .menu-carousel::-webkit-scrollbar { 
+            display: none; /* Safari and Chrome */
+        }
+
+        .menu-card {
+            flex: 0 0 320px;
+            scroll-snap-align: center;
+            background-color: var(--cream);
+            border: 1px solid rgba(200, 134, 10, 0.3);
+            border-radius: 12px;
+            padding: 2.5rem 2rem;
+            position: relative;
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            background-image: url('data:image/svg+xml;utf8,<svg width="100" height="100" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg"><rect width="100" height="100" fill="none"/><circle cx="50" cy="50" r="1.5" fill="%23c8860a" fill-opacity="0.1"/></svg>');
+            background-size: 20px 20px;
+        }
+
+        .menu-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 20px 40px rgba(26, 58, 42, 0.08);
+            border-color: var(--warm-amber);
+        }
+
+        .menu-card-tag {
+            position: absolute;
+            top: -12px;
+            left: 20px;
+            background-color: var(--forest-green);
+            color: var(--cream);
+            font-size: 0.75rem;
+            font-weight: 600;
+            padding: 0.3rem 0.8rem;
+            border-radius: 20px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+        }
+
+        .menu-card-tag.veg { background-color: #2e7d32; }
+        .menu-card-tag.non-veg { background-color: var(--coral-red); }
+        .menu-card-tag.chef { background-color: var(--warm-amber); color: var(--wood-brown); }
+
+        .menu-card h3 {
+            font-size: 1.5rem;
+            margin-bottom: 0.8rem;
+            color: var(--forest-green);
+        }
+
+        .menu-card p {
+            font-size: 0.95rem;
+            color: var(--wood-brown);
+            margin-bottom: 1.5rem;
+            line-height: 1.5;
+        }
+
+        .menu-card-price {
+            font-family: var(--font-headings);
+            font-size: 1.3rem;
+            font-weight: 700;
+            color: var(--warm-amber);
+            border-top: 1px dotted rgba(26, 58, 42, 0.2);
+            padding-top: 1rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        /* Swipe Instruction */
+        .swipe-hint {
+            text-align: center;
+            margin-top: 1rem;
+            color: var(--warm-amber);
+            font-size: 0.9rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.5rem;
+            opacity: 0.8;
+        }
+        
+        .swipe-hint svg {
+            width: 20px;
+            height: 20px;
+            fill: currentColor;
+            animation: swipeAnim 2s infinite ease-in-out;
+        }
+
+        @keyframes swipeAnim {
+            0%, 100% { transform: translateX(0); }
+            50% { transform: translateX(10px); }
+        }
+
+        /* Experience Section */
+        .experience {
+            position: relative;
+            padding: 8rem 5%;
+            background-image: linear-gradient(to bottom, rgba(26, 58, 42, 0.7), rgba(13, 29, 21, 0.95)), url('experience-bg.jpg');
+            background-size: cover;
+            background-attachment: fixed;
+            background-position: center;
+            color: var(--cream);
+            text-align: center;
+        }
+
+        .experience h2 {
+            font-size: 4rem;
+            color: var(--cream);
+            max-width: 800px;
+            margin: 0 auto 4rem auto;
+            line-height: 1.2;
+            text-shadow: 0 2px 10px rgba(0,0,0,0.5);
+        }
+
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 2rem;
+            max-width: 1000px;
+            margin: 0 auto;
+        }
+
+        .feature-item {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 1rem;
+        }
+
+        .feature-icon {
+            font-size: 2.5rem;
+            width: 80px;
+            height: 80px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: rgba(200, 134, 10, 0.1);
+            border: 1px solid rgba(200, 134, 10, 0.3);
+            border-radius: 50%;
+            margin-bottom: 0.5rem;
+            transition: transform 0.3s ease;
+        }
+        
+        .feature-item:hover .feature-icon {
+            transform: scale(1.1);
+            background: rgba(200, 134, 10, 0.2);
+        }
+
+        .feature-item h4 {
+            font-family: var(--font-body);
+            font-size: 1.2rem;
+            font-weight: 500;
+            color: var(--cream);
+        }
+
+        /* Testimonials Section */
+        .testimonials {
+            padding: var(--section-padding);
+            background-color: var(--cream);
+        }
+
+        .reviews-container {
+            max-width: 1000px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 2rem;
+        }
+
+        .review-card {
+            background: white;
+            padding: 2.5rem 2rem;
+            border-radius: 8px;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.05);
+            position: relative;
+        }
+
+        .review-card::before {
+            content: '"';
+            font-family: var(--font-headings);
+            font-size: 6rem;
+            color: rgba(200, 134, 10, 0.1);
+            position: absolute;
+            top: -10px;
+            left: 10px;
+            line-height: 1;
+        }
+
+        .stars {
+            color: var(--warm-amber);
+            font-size: 1.2rem;
+            margin-bottom: 1rem;
+            letter-spacing: 2px;
+        }
+
+        .review-text {
+            font-style: italic;
+            margin-bottom: 1.5rem;
+            position: relative;
+            z-index: 1;
+            font-size: 1.05rem;
+        }
+
+        .reviewer {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+
+        .reviewer-avatar {
+            width: 40px;
+            height: 40px;
+            background-color: var(--forest-green);
+            color: var(--cream);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 600;
+            font-family: var(--font-headings);
+            font-size: 1.2rem;
+        }
+
+        .reviewer-info h5 {
+            font-family: var(--font-body);
+            font-size: 1rem;
+            color: var(--forest-green);
+        }
+
+        .reviewer-info span {
+            font-size: 0.8rem;
+            color: #888;
+        }
+
+        /* Contact Section */
+        .contact {
+            padding: var(--section-padding);
+            background-color: #fcfbfa; /* Slightly off-cream to differentiate */
+            position: relative;
+        }
+
+        .contact-card {
+            max-width: 800px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: 0 15px 40px rgba(26, 58, 42, 0.08);
+            display: flex;
+        }
+
+        .contact-info {
+            flex: 1;
+            padding: 4rem 3rem;
+            background-color: var(--forest-green);
+            color: var(--cream);
+        }
+
+        .contact-info h3 {
+            font-size: 2.5rem;
+            color: var(--warm-amber);
+            margin-bottom: 2rem;
+        }
+
+        .info-item {
+            margin-bottom: 1.5rem;
+            display: flex;
+            gap: 1rem;
+            align-items: flex-start;
+        }
+
+        .info-item svg {
+            width: 24px;
+            height: 24px;
+            fill: var(--warm-amber);
+            flex-shrink: 0;
+            margin-top: 3px;
+        }
+
+        .info-item p, .info-item a {
+            color: var(--cream);
+            text-decoration: none;
+            font-size: 1.05rem;
+        }
+        
+        .info-item a:hover {
+            color: var(--warm-amber);
+        }
+        
+        .info-item strong {
+            display: block;
+            margin-bottom: 0.2rem;
+            color: rgba(245, 239, 224, 0.7);
+            font-weight: 400;
+            font-size: 0.9rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .map-placeholder {
+            flex: 1;
+            background-color: #e0e0e0;
+            position: relative;
+            min-height: 400px;
+            background-image: url('map.png');
+            background-size: cover;
+            background-position: center;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .btn-map {
+            background: white;
+            color: var(--forest-green);
+            padding: 0.8rem 1.5rem;
+            border-radius: 50px;
+            font-family: var(--font-body);
+            font-weight: 600;
+            text-decoration: none;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.15);
+            transition: all 0.3s ease;
+            z-index: 10;
+        }
+        
+        .btn-map:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 15px 30px rgba(0,0,0,0.25);
+            color: var(--coral-red);
+        }
+
+        /* Footer */
+        .footer {
+            background-color: var(--forest-green);
+            color: var(--cream);
+            text-align: center;
+            padding: 4rem 5% 4rem;
+            border-top: 5px solid var(--warm-amber);
+        }
+
+        .footer-logo {
+            font-family: var(--font-headings);
+            font-size: 2.5rem;
+            color: var(--cream);
+            margin-bottom: 0.5rem;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .footer-tagline {
+            color: var(--warm-amber);
+            font-size: 1.1rem;
+            margin-bottom: 2rem;
+            font-style: italic;
+            font-family: var(--font-headings);
+        }
+
+        .footer-nav {
+            display: flex;
+            justify-content: center;
+            gap: 2rem;
+            margin-bottom: 2rem;
+        }
+
+        .footer-nav a {
+            color: rgba(245, 239, 224, 0.7);
+            text-decoration: none;
+            font-size: 0.95rem;
+            transition: color 0.3s ease;
+        }
+
+        .footer-nav a:hover {
+            color: var(--warm-amber);
+        }
+
+        .social-icons {
+            display: flex;
+            justify-content: center;
+            gap: 1.5rem;
+            margin-bottom: 3rem;
+        }
+
+        .social-icons a {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background: rgba(255,255,255,0.05);
+            color: var(--cream);
+            transition: all 0.3s ease;
+        }
+
+        .social-icons a:hover {
+            background: var(--warm-amber);
+            color: var(--forest-green);
+            transform: translateY(-3px);
+        }
+        
+        .social-icons svg {
+            width: 20px;
+            height: 20px;
+            fill: currentColor;
+        }
+
+        .copyright {
+            color: rgba(245, 239, 224, 0.4);
+            font-size: 0.85rem;
+            letter-spacing: 0.5px;
+        }
+
+        /* Scroll Animations */
+        .fade-in {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: opacity 0.8s ease-out, transform 0.8s ease-out;
+        }
+        
+        .fade-in.appear {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .delay-1 { transition-delay: 0.1s; }
+        .delay-2 { transition-delay: 0.2s; }
+        .delay-3 { transition-delay: 0.3s; }
+
+        /* Media Queries */
+        @media (max-width: 992px) {
+            .about-container { flex-direction: column; text-align: center; }
+            .about-image { order: 2; margin-top: 2rem; }
+            .about-content { order: 1; }
+            .malayalam-accent { font-size: 6rem; }
+            
+            .features-grid { grid-template-columns: 1fr; gap: 3rem; }
+            
+            .reviews-container { grid-template-columns: 1fr; max-width: 500px; }
+            
+            .contact-card { flex-direction: column; }
+            .map-placeholder { height: 300px; min-height: auto; }
+        }
+
+        @media (max-width: 768px) {
+            .hero h1 { font-size: 3.5rem; }
+            .hero p { font-size: 1rem; }
+            .section-header h2 { font-size: 2.2rem; }
+            .experience h2 { font-size: 2.5rem; }
+            .floating-badge { display: none; }
+            
+            .nav-links {
+                position: absolute;
+                top: 100%;
+                left: 0;
+                width: 100%;
+                background-color: var(--forest-green);
+                flex-direction: column;
+                align-items: center;
+                padding: 2rem 0;
+                gap: 1.5rem;
+                box-shadow: 0 10px 20px rgba(0,0,0,0.1);
+                clip-path: polygon(0 0, 100% 0, 100% 0, 0 0);
+                transition: clip-path 0.4s ease-in-out;
+            }
+            
+            .nav-links.active {
+                clip-path: polygon(0 0, 100% 0, 100% 100%, 0 100%);
+            }
+
+            .menu-toggle { display: flex; }
+            
+            .menu-card { flex: 0 0 280px; }
+        }
+    
+        /* Full Menu Overlay */
+        .wave-transition {
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            height: 100vh;
+            background-color: var(--forest-green);
+            z-index: 3000;
+            transform: translateY(100%);
+            transition: transform 600ms ease-in-out;
+            pointer-events: none;
+        }
+        .wave-transition::before {
+            content: '';
+            position: absolute;
+            top: -49px;
+            left: 0;
+            width: 100%;
+            height: 50px;
+            background-repeat: repeat-x;
+            background-image: url('data:image/svg+xml;utf8,<svg viewBox="0 0 1200 120" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="none"><path d="M321.39,56.44c58-10.79,114.16-30.13,172-41.86,82.39-16.72,168.19-17.73,250.45-.39C823.78,31,906.67,72,985.66,92.83c70.05,18.48,146.53,26.09,214.34,3V120H0V0C63.66,35.79,141.59,62.82,216,68.9,251.72,71.82,287.6,62.91,321.39,56.44Z" fill="%231a3a2a"></path></svg>');
+            background-size: 100% 50px;
+        }
+        .wave-transition.wave-up {
+            transform: translateY(0);
+        }
+        .wave-transition.wave-recede {
+            transform: translateY(calc(100% + 50px));
+        }
+
+        .full-menu-page {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100vh;
+            background-color: var(--forest-green);
+            z-index: 2000;
+            display: flex;
+            flex-direction: column;
+            opacity: 0;
+            visibility: hidden;
+            transition: opacity 0.3s ease;
+            overflow: hidden;
+            color: var(--cream);
+        }
+        
+        .full-menu-page::before {
+            content: '';
+            position: absolute;
+            top: 0; left: 0; right: 0; bottom: 0;
+            opacity: 0.05;
+            background-image: radial-gradient(var(--warm-amber) 1px, transparent 1px);
+            background-size: 20px 20px;
+            z-index: 0;
+            pointer-events: none;
+        }
+        
+        .full-menu-topbar {
+            position: relative;
+            z-index: 10;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1.5rem 5%;
+            background-color: rgba(26, 58, 42, 0.95);
+            backdrop-filter: blur(10px);
+            box-shadow: 0 4px 20px rgba(0,0,0,0.2);
+        }
+        
+        .full-menu-brand {
+            font-family: var(--font-headings);
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--cream);
+            text-decoration: none;
+        }
+        
+        .full-menu-search-container {
+            flex: 1;
+            max-width: 400px;
+            margin: 0 2rem;
+        }
+        
+        .full-menu-search {
+            width: 100%;
+            padding: 0.6rem 1rem;
+            border-radius: 20px;
+            border: 1px solid rgba(245, 239, 224, 0.2);
+            background: rgba(255,255,255,0.05);
+            color: var(--cream);
+            font-family: var(--font-body);
+            outline: none;
+        }
+        
+        .full-menu-search::placeholder {
+            color: rgba(245, 239, 224, 0.5);
+        }
+
+        .btn-back {
+            color: var(--cream);
+            border: 1px solid rgba(245, 239, 224, 0.2);
+            padding: 0.5rem 1.2rem;
+            border-radius: 4px;
+            text-decoration: none;
+            font-family: var(--font-body);
+            font-size: 0.9rem;
+            transition: all 0.3s ease;
+            cursor: pointer;
+            background: transparent;
+        }
+        
+        .btn-back:hover {
+            background: rgba(245, 239, 224, 0.1);
+        }
+        
+        /* Main Layout */
+        .full-menu-content {
+            position: relative;
+            z-index: 10;
+            display: flex;
+            flex: 1;
+            overflow: hidden;
+            padding: 2rem 5%;
+            gap: 3rem;
+        }
+        
+        /* Sidebar container */
+        .full-menu-sidebar {
+            width: 250px;
+            overflow-y: auto;
+            scrollbar-width: none; /* Firefox */
+        }
+        .full-menu-sidebar::-webkit-scrollbar { display: none; }
+        
+        .category-tab {
+            display: block;
+            width: 100%;
+            text-align: left;
+            background: transparent;
+            border: none;
+            color: rgba(245, 239, 224, 0.6);
+            padding: 0.8rem 1rem;
+            font-family: var(--font-body);
+            font-size: 1rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            border-left: 2px solid transparent;
+            margin-bottom: 0.2rem;
+        }
+        
+        .category-tab:hover {
+            color: var(--cream);
+            background: rgba(255,255,255,0.05);
+        }
+        
+        .category-tab.active {
+            color: var(--warm-amber);
+            border-left-color: var(--warm-amber);
+            background: rgba(200, 134, 10, 0.1);
+            font-weight: 600;
+        }
+        
+        /* Main Item Area */
+        .full-menu-items-area {
+            flex: 1;
+            overflow-y: auto;
+            padding-right: 1rem;
+            padding-bottom: 6rem;
+        }
+        
+        .full-menu-items-area::-webkit-scrollbar {
+            width: 6px;
+        }
+        .full-menu-items-area::-webkit-scrollbar-thumb {
+            background-color: rgba(200, 134, 10, 0.5);
+            border-radius: 10px;
+        }
+        
+        .category-section {
+            display: none;
+            animation: fadeIn 0.4s ease;
+        }
+        .category-section.active {
+            display: block;
+        }
+        
+        .category-title {
+            font-size: 2rem;
+            color: var(--warm-amber);
+            margin-bottom: 2rem;
+            padding-bottom: 0.5rem;
+            border-bottom: 1px solid rgba(245, 239, 224, 0.1);
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+
+        .category-title.special-header {
+            color: #ffbf00;
+            text-shadow: 0 0 10px rgba(255, 191, 0, 0.3);
+            border-bottom-color: rgba(255, 191, 0, 0.3);
+        }
+        
+        .category-badge {
+            font-size: 0.8rem;
+            padding: 0.2rem 0.6rem;
+            border-radius: 12px;
+            font-family: var(--font-body);
+            letter-spacing: 1px;
+            text-transform: uppercase;
+            font-weight: 600;
+            vertical-align: middle;
+            background-color: var(--coral-red);
+            color: white;
+            margin-left: 1rem;
+        }
+        
+        .menu-items-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 1.5rem;
+        }
+        
+        .menu-item-row {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1rem;
+            background: rgba(255, 255, 255, 0.03);
+            border-bottom: 1px solid rgba(200, 134, 10, 0.2);
+            border-radius: 4px;
+            opacity: 0;
+            transform: translateX(-20px);
+            transition: background 0.3s ease, transform 0.3s ease, border-color 0.3s ease;
+            animation: staggerSlideIn 0.5s ease forwards;
+        }
+        
+        .menu-item-row:hover {
+            background: rgba(255, 255, 255, 0.08);
+            border-bottom-color: var(--warm-amber);
+            transform: translateY(-2px);
+        }
+        
+        .item-name {
+            font-size: 1.1rem;
+            color: var(--cream);
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+        
+        .item-dot {
+            font-size: 0.6rem;
+        }
+        
+        .item-price {
+            font-family: var(--font-headings);
+            font-size: 1.2rem;
+            color: var(--warm-amber);
+            font-weight: 600;
+        }
+        
+        @keyframes staggerSlideIn {
+            to {
+                opacity: 1;
+                transform: translateX(0);
+            }
+        }
+        
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        @media (max-width: 768px) {
+            .full-menu-topbar {
+                flex-wrap: wrap;
+                gap: 1rem;
+                padding: 1rem 5%;
+            }
+            .full-menu-search-container {
+                max-width: 100%;
+                margin: 0;
+                order: 3;
+                width: 100%;
+            }
+            .full-menu-content {
+                flex-direction: column;
+                padding: 1rem 5%;
+                gap: 1rem;
+            }
+            .full-menu-sidebar {
+                width: 100%;
+                display: flex;
+                overflow-x: auto;
+                white-space: nowrap;
+                padding-bottom: 10px;
+                border-bottom: 1px solid rgba(245,239,224,0.1);
+            }
+            .category-tab {
+                display: inline-block;
+                width: auto;
+                border-left: none;
+                border-bottom: 2px solid transparent;
+            }
+            .category-tab.active {
+                border-left: none;
+                border-bottom-color: var(--warm-amber);
+            }
+            .menu-items-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Navigation -->
+    <nav class="navbar" id="navbar">
+        <a href="#" class="nav-brand">Kaliyodam 🛖</a>
+        <div class="menu-toggle" id="mobile-menu">
+            <span></span>
+            <span></span>
+            <span></span>
+        </div>
+        <div class="nav-links">
+            <a href="#story">Our Story</a>
+            <a href="#menu">Menu Highlights</a>
+            <a href="#experience">Ambience</a>
+            <a href="#contact">Find Us</a>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="hero" id="hero">
+        <div class="hero-bg"></div>
+        <div class="hero-ripple"></div>
+        <div class="hero-container">
+            <div class="hero-content fade-in">
+                <p class="hero-subtitle">Authentic Kerala Cuisine</p>
+                <h1>Kaliyodam</h1>
+                <p>A Mallu Food Boat · Straight From The Backwaters To Bengaluru</p>
+                <div class="hero-cta">
+                    <a href="#menu" class="btn btn-primary">View Menu</a>
+                    <a href="#contact" class="btn btn-ghost">Find Us</a>
+                </div>
+            </div>
+            
+            <div class="hero-images fade-in delay-2">
+                <div class="hero-img-card img-1">
+                    <img src="photo1.jpg" alt="Kaliyodam Sign">
+                </div>
+                <div class="hero-img-card img-2">
+                    <img src="photo2.jpg" alt="Kaliyodam Interior">
+                </div>
+                <div class="hero-img-card img-3">
+                    <img src="photo3.jpg" alt="Kaliyodam Exterior">
+                </div>
+            </div>
+        </div>
+        
+        <div class="floating-badge">
+            🟢 Open Until 11 PM
+        </div>
+    </section>
+
+    <!-- About Section -->
+    <section class="about" id="story">
+        <div class="malayalam-accent">കലിയോടം</div>
+        <div class="about-container">
+            <div class="about-image fade-in delay-1">
+                <!-- SVG Boat & Coconut Tree -->
+                <svg class="svg-illustration" viewBox="0 0 400 300" xmlns="http://www.w3.org/2000/svg">
+                    <!-- Sun/Moon backdrop -->
+                    <circle cx="200" cy="150" r="120" fill="#f5efe0" />
+                    <circle cx="200" cy="150" r="100" fill="#ffebd3" />
+                    <!-- Coconut Trees right -->
+                    <path d="M 320 250 Q 300 150 330 80 Q 335 150 340 250 Z" fill="#2d523c" />
+                    <path d="M 330 80 Q 280 100 270 120 Q 300 90 330 80" fill="#1a3a2a" />
+                    <path d="M 330 80 Q 350 40 370 30 Q 350 70 330 80" fill="#1a3a2a" />
+                    <path d="M 330 80 Q 380 90 390 120 Q 360 90 330 80" fill="#1a3a2a" />
+                     <!-- Coconut Trees left -->
+                    <path d="M 80 250 Q 100 160 70 90 Q 65 160 60 250 Z" fill="#2d523c" />
+                    <path d="M 70 90 Q 120 110 130 130 Q 100 100 70 90" fill="#1a3a2a" />
+                    <path d="M 70 90 Q 50 50 30 40 Q 50 80 70 90" fill="#1a3a2a" />
+                    <!-- Water -->
+                    <path d="M 0 220 Q 100 210 200 220 T 400 220 L 400 300 L 0 300 Z" fill="#1e4d35" />
+                    <path d="M 0 240 Q 100 230 200 240 T 400 240 L 400 300 L 0 300 Z" fill="#153625" />
+                    <!-- Kettuvallam (Houseboat) -->
+                    <path d="M 120 220 Q 200 250 280 220 L 260 190 Q 200 170 140 190 Z" fill="#4a2c0a" />
+                    <path d="M 150 190 L 250 190 L 240 150 L 160 150 Z" fill="#c8860a" />
+                    <path d="M 155 150 Q 200 130 245 150 Z" fill="#3a2208" />
+                    <!-- Reflection -->
+                    <path d="M 130 245 Q 200 260 270 245" stroke="#2d523c" stroke-width="3" fill="none" opacity="0.5"/>
+                    <path d="M 150 255 Q 200 265 250 255" stroke="#2d523c" stroke-width="3" fill="none" opacity="0.3"/>
+                </svg>
+            </div>
+            
+            <div class="about-content fade-in">
+                <div class="section-header" style="text-align: left; margin-bottom: 2rem;">
+                    <p>Our Story</p>
+                    <h2>Soul from the Backwaters</h2>
+                </div>
+                <p>Paint a picture of Kerala's backwaters arriving in the heart of Bengaluru. At Kaliyodam, we don't just serve meals; we share our heritage. Step onto our food boat and leave the city bustle behind.</p>
+                <p>We believe in the soul of Kerala cooking — slow fire, fresh coconut, and hand-ground spices passed down through generations. Every fish curry is simmered in earthen pots, and every sadya leaf holds the warmth of our grandmother's kitchen.</p>
+                
+                <div class="stat-card">
+                    <strong>3.8 <span style="font-size:1.2rem; color:var(--warm-amber)">★</span></strong>
+                    <span>701+ Happy<br>Guests</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Menu Section -->
+    <section class="menu" id="menu">
+        <div class="section-header fade-in">
+            <p>Culinary Journey</p>
+            <h2>Menu Highlights</h2>
+        </div>
+
+        <div class="swipe-hint fade-in delay-1">
+            <svg viewBox="0 0 24 24"><path d="M12 2L8 6h3v8h2V6h3L12 2zm0 20l4-4h-3v-8h-2v8H8l4 4z" transform="rotate(-90 12 12)"/></svg>
+            Swipe to explore
+        </div>
+
+        <div class="menu-carousel fade-in delay-2">
+            <!-- Card 1 -->
+            <div class="menu-card">
+                <span class="menu-card-tag veg">Veg Feast</span>
+                <h3>Banana Leaf Sadya</h3>
+                <p>A grand vegetarian feast featuring 20+ traditional dishes served on a fresh, fragrant banana leaf. The ultimate Kerala experience.</p>
+                <div class="menu-card-price">
+                    <span>₹250</span>
+                </div>
+            </div>
+
+            <!-- Card 2 -->
+            <div class="menu-card">
+                <span class="menu-card-tag non-veg">Non-Veg</span>
+                <h3>Kerala Fish Curry</h3>
+                <p>Tangy, spicy, and unforgettable. Slow-cooked to perfection in an earthen pot with fresh coccum and a rich coconut paste.</p>
+                <div class="menu-card-price">
+                    <span>₹320</span>
+                </div>
+            </div>
+
+            <!-- Card 3 -->
+            <div class="menu-card">
+                <span class="menu-card-tag chef">Chef's Pick</span>
+                <h3>Karimeen Pollichathu</h3>
+                <p>The iconic pearl spot fish marinated in fiery coastal spices, lovingly wrapped and steam-roasted in a banana leaf.</p>
+                <div class="menu-card-price">
+                    <span>₹380</span>
+                </div>
+            </div>
+
+            <!-- Card 4 -->
+            <div class="menu-card">
+                <span class="menu-card-tag non-veg">Non-Veg</span>
+                <h3>Porotta & Beef Curry</h3>
+                <p>Hot, flaky, multi-layered flatbread paired with a rich, slow-roasted beef fry. Dangerously addictive and soul-satisfying.</p>
+                <div class="menu-card-price">
+                    <span>₹280</span>
+                </div>
+            </div>
+
+            <!-- Card 5 -->
+            <div class="menu-card">
+                <span class="menu-card-tag veg">Veg</span>
+                <h3>Appam with Stew</h3>
+                <p>Delicate, lacy rice hoppers with a crispy edge, perfectly paired with our comforting, coconut-milk rich vegetable stew.</p>
+                <div class="menu-card-price">
+                    <span>₹200</span>
+                </div>
+            </div>
+
+            <!-- Card 6 -->
+            <div class="menu-card">
+                <span class="menu-card-tag non-veg">Non-Veg</span>
+                <h3>Kerala Prawn Roast</h3>
+                <p>Juicy prawns tossed in a thick, deeply flavorful peppery black masala, finished with fresh, crispy curry leaves.</p>
+                <div class="menu-card-price">
+                    <span>₹350</span>
+                </div>
+            </div>
+
+            <!-- Card 7 -->
+            <div class="menu-card">
+                <span class="menu-card-tag veg">Veg</span>
+                <h3>Puttu & Kadala Curry</h3>
+                <p>Traditional steamed rice flour cylinders layered with grated coconut, served alongside a robust, aromatic black chickpea curry.</p>
+                <div class="menu-card-price">
+                    <span>₹180</span>
+                </div>
+            </div>
+
+            <!-- Card 8 -->
+            <div class="menu-card">
+                <span class="menu-card-tag veg">Veg</span>
+                <h3>Pazham Pori</h3>
+                <p>Crispy, golden-fried ripe banana fritters. Sweet, warm, and the perfect tea-time indulgence or sweet end to a meal.</p>
+                <div class="menu-card-price">
+                    <span>₹120</span>
+                </div>
+            </div>
+        </div>
+        
+        <div style="text-align: center; margin-top: 3rem;" class="fade-in delay-3">
+            <a href="#" class="btn btn-ghost-dark" id="btn-open-menu">View Full Menu</a>
+        </div>
+    </section>
+
+    <!-- Experience / Ambience -->
+    <section class="experience" id="experience">
+        <div class="fade-in">
+            <h2>Not just a meal. An escape to God's Own Country.</h2>
+            
+            <div class="features-grid">
+                <div class="feature-item fade-in delay-1">
+                    <div class="feature-icon">🛖</div>
+                    <h4>Boat-Themed Decor</h4>
+                </div>
+                <div class="feature-item fade-in delay-2">
+                    <div class="feature-icon">🍃</div>
+                    <h4>Banana Leaf Dining</h4>
+                </div>
+                <div class="feature-item fade-in delay-3">
+                    <div class="feature-icon">🎶</div>
+                    <h4>Kerala Folk Ambience</h4>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Testimonials Section -->
+    <section class="testimonials">
+        <div class="section-header fade-in">
+            <p>Guest Book</p>
+            <h2>Stories from the Deck</h2>
+        </div>
+
+        <div class="reviews-container">
+            <!-- Review 1 -->
+            <div class="review-card fade-in delay-1">
+                <div class="stars">★★★★★</div>
+                <p class="review-text">"The closest I've felt to my grandmother's kitchen since I moved to BLR. The Karimeen Pollichathu is an absolute masterpiece. Every bite tastes like home."</p>
+                <div class="reviewer">
+                    <div class="reviewer-avatar">A</div>
+                    <div class="reviewer-info">
+                        <h5>Arjun M.</h5>
+                        <span>Indiranagar</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Review 2 -->
+            <div class="review-card fade-in delay-2">
+                <div class="stars">★★★★★</div>
+                <p class="review-text">"A hidden gem in Kothanur! The boat theme instantly transports you, and that beef fry with porotta is dangerously addictive. The spices are perfectly balanced."</p>
+                <div class="reviewer">
+                    <div class="reviewer-avatar">P</div>
+                    <div class="reviewer-info">
+                        <h5>Priya S.</h5>
+                        <span>HBR Layout</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Review 3 -->
+            <div class="review-card fade-in delay-3">
+                <div class="stars">★★★★☆</div>
+                <p class="review-text">"Incredible Banana Leaf Sadya experience. You can taste the authenticity and slow cooking in the sambar and payasam. We will definitely be coming back every Sunday."</p>
+                <div class="reviewer">
+                    <div class="reviewer-avatar">R</div>
+                    <div class="reviewer-info">
+                        <h5>Rahul V.</h5>
+                        <span>Kalyan Nagar</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section class="contact" id="contact">
+        <div class="section-header fade-in">
+            <p>Dock Here</p>
+            <h2>Find Us</h2>
+        </div>
+
+        <div class="contact-card fade-in delay-1">
+            <div class="contact-info">
+                <h3>Kaliyodam</h3>
+                
+                <div class="info-item">
+                    <svg viewBox="0 0 24 24"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z"/></svg>
+                    <div>
+                        <strong>Address</strong>
+                        <p>Kothanur, Bengaluru,<br>Karnataka 560077</p>
+                    </div>
+                </div>
+
+                <div class="info-item">
+                    <svg viewBox="0 0 24 24"><path d="M11.99 2C6.47 2 2 6.48 2 12s4.47 10 9.99 10C17.52 22 22 17.52 22 12S17.52 2 11.99 2zM12 20c-4.42 0-8-3.58-8-8s3.58-8 8-8 8 3.58 8 8-3.58 8-8 8zm.5-13H11v6l5.25 3.15.75-1.23-4.5-2.67z"/></svg>
+                    <div>
+                        <strong>Hours</strong>
+                        <p>Open Today · Closes 11 PM</p>
+                    </div>
+                </div>
+
+                <div class="info-item">
+                    <svg viewBox="0 0 24 24"><path d="M20.01 15.38c-1.23 0-2.42-.2-3.53-.56-.35-.12-.74-.03-1.01.24l-1.57 1.97c-2.83-1.35-5.48-3.9-6.89-6.83l1.95-1.66c.27-.28.35-.67.24-1.02-.37-1.11-.56-2.3-.56-3.53 0-.54-.45-.99-.99-.99H4.19C3.65 3 3 3.24 3 3.99 3 13.28 10.73 21 20.01 21c.71 0 .99-.63.99-1.18v-3.45c0-.54-.45-.99-.99-.99z"/></svg>
+                    <div>
+                        <strong>Reservations</strong>
+                        <p>+91 98765 43210</p>
+                    </div>
+                </div>
+
+                <div style="margin-top: 3rem;">
+                    <a href="https://instagram.com/kaliyodam_restaurant" class="btn btn-ghost" style="display: inline-flex; gap: 0.8rem; border-color: rgba(245, 239, 224, 0.4); border-radius: 50px; padding: 0.8rem 1.5rem;" target="_blank">
+                        <svg viewBox="0 0 24 24" style="width: 20px; height: 20px; fill: currentColor;"><path d="M7.8,2H16.2C19.4,2 22,4.6 22,7.8V16.2A5.8,5.8 0 0,1 16.2,22H7.8C4.6,22 2,19.4 2,16.2V7.8A5.8,5.8 0 0,1 7.8,2M7.6,4A3.6,3.6 0 0,0 4,7.6V16.4C4,18.39 5.61,20 7.6,20H16.4A3.6,3.6 0 0,0 20,16.4V7.6C20,5.61 18.39,4 16.4,4H7.6M17.25,5.5A1.25,1.25 0 0,1 18.5,6.75A1.25,1.25 0 0,1 17.25,8A1.25,1.25 0 0,1 16,6.75A1.25,1.25 0 0,1 17.25,5.5M12,7A5,5 0 0,1 17,12A5,5 0 0,1 12,17A5,5 0 0,1 7,12A5,5 0 0,1 12,7M12,9A3,3 0 0,0 9,12A3,3 0 0,0 12,15A3,3 0 0,0 15,12A3,3 0 0,0 12,9Z"/></svg>
+                        Follow Our Journey
+                    </a>
+                </div>
+            </div>
+            
+            <div class="map-placeholder">
+                <a href="https://www.google.com/maps/place/Kaliyodam+Restaurant/@13.0704529,77.6491669,17z/data=!3m1!4b1!4m6!3m5!1s0x3bae19f08cb274b9:0x225d5ecb8a87aea5!8m2!3d13.0704477!4d77.6517418!16s%2Fg%2F11x2x59j77?entry=ttu&g_ep=EgoyMDI2MDMxMS4wIKXMDSoASAFQAw%3D%3D" target="_blank" class="btn-map">
+                    <svg viewBox="0 0 24 24" style="width:18px;height:18px;fill:currentColor"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z"/></svg>
+                    Get Directions
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="footer-logo">
+            Kaliyodam 🛖
+        </div>
+        <p class="footer-tagline">A Mallu Food Boat</p>
+        
+        <div class="footer-nav">
+            <a href="#story">Story</a>
+            <a href="#menu">Menu</a>
+            <a href="#experience">Ambience</a>
+            <a href="#contact">Location</a>
+        </div>
+        
+        <!-- <div class="social-icons">
+            <a href="#" aria-label="Facebook"><svg viewBox="0 0 24 24"><path d="M12 2.04C6.5 2.04 2 6.53 2 12.06C2 17.06 5.66 21.21 10.44 21.96V14.96H7.9V12.06H10.44V9.85C10.44 7.34 11.93 5.96 14.22 5.96C15.31 5.96 16.45 6.15 16.45 6.15V8.62H15.19C13.95 8.62 13.56 9.39 13.56 10.18V12.06H16.34L15.89 14.96H13.56V21.96A10 10 0 0 0 22 12.06C22 6.53 17.5 2.04 12 2.04Z"/></svg></a>
+            <a href="#" aria-label="Instagram"><svg viewBox="0 0 24 24"><path d="M7.8,2H16.2C19.4,2 22,4.6 22,7.8V16.2A5.8,5.8 0 0,1 16.2,22H7.8C4.6,22 2,19.4 2,16.2V7.8A5.8,5.8 0 0,1 7.8,2M7.6,4A3.6,3.6 0 0,0 4,7.6V16.4C4,18.39 5.61,20 7.6,20H16.4A3.6,3.6 0 0,0 20,16.4V7.6C20,5.61 18.39,4 16.4,4H7.6M17.25,5.5A1.25,1.25 0 0,1 18.5,6.75A1.25,1.25 0 0,1 17.25,8A1.25,1.25 0 0,1 16,6.75A1.25,1.25 0 0,1 17.25,5.5M12,7A5,5 0 0,1 17,12A5,5 0 0,1 12,17A5,5 0 0,1 7,12A5,5 0 0,1 12,7M12,9A3,3 0 0,0 9,12A3,3 0 0,0 12,15A3,3 0 0,0 15,12A3,3 0 0,0 12,9Z"/></svg></a>
+            <a href="#" aria-label="Twitter"><svg viewBox="0 0 24 24"><path d="M22.46,6C21.69,6.35 20.86,6.58 20,6.69C20.88,6.16 21.56,5.32 21.88,4.31C21.05,4.81 20.13,5.16 19.16,5.36C18.37,4.5 17.26,4 16,4C13.65,4 11.73,5.92 11.73,8.29C11.73,8.63 11.77,8.96 11.84,9.27C8.28,9.09 5.11,7.38 3,4.79C2.63,5.42 2.42,6.16 2.42,6.94C2.42,8.43 3.17,9.75 4.33,10.5C3.62,10.5 2.96,10.3 2.38,10V10.03C2.38,12.11 3.86,13.85 5.82,14.24C5.46,14.34 5.08,14.39 4.69,14.39C4.42,14.39 4.15,14.36 3.89,14.31C4.43,16.01 6.01,17.26 7.89,17.29C6.43,18.45 4.58,19.13 2.56,19.13C2.22,19.13 1.88,19.11 1.54,19.07C3.44,20.29 5.7,21 8.12,21C16.01,21 20.33,14.46 20.33,8.79C20.33,8.6 20.33,8.42 20.32,8.23C21.16,7.63 21.88,6.87 22.46,6Z"/></svg></a>
+        </div> -->
+        
+        <p class="copyright">Bringing God's Own Country to Bengaluru<br><br>© 2026 Kaliyodam Restaurant. All rights reserved.</p>
+    </footer>
+
+    <!-- Scripts -->
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            
+            // 1. Sticky Navbar Effect
+            const navbar = document.getElementById('navbar');
+            
+            window.addEventListener('scroll', () => {
+                if (window.scrollY > 50) {
+                    navbar.classList.add('scrolled');
+                } else {
+                    navbar.classList.remove('scrolled');
+                }
+            });
+
+            // 2. Mobile Menu Toggle
+            const mobileMenuBtn = document.getElementById('mobile-menu');
+            const navLinks = document.querySelector('.nav-links');
+            
+            mobileMenuBtn.addEventListener('click', () => {
+                navLinks.classList.toggle('active');
+            });
+
+            // Close mobile menu when link is clicked
+            document.querySelectorAll('.nav-links a').forEach(link => {
+                link.addEventListener('click', () => {
+                    navLinks.classList.remove('active');
+                });
+            });
+
+            // 3. Scroll Fade-In Animation (Intersection Observer)
+            const fadeElements = document.querySelectorAll('.fade-in');
+            
+            const appearOptions = {
+                threshold: 0.15,
+                rootMargin: "0px 0px -50px 0px"
+            };
+
+            const appearOnScroll = new IntersectionObserver(function(entries, observer) {
+                entries.forEach(entry => {
+                    if (!entry.isIntersecting) {
+                        return;
+                    } else {
+                        entry.target.classList.add('appear');
+                        observer.unobserve(entry.target);
+                    }
+                });
+            }, appearOptions);
+
+            fadeElements.forEach(element => {
+                appearOnScroll.observe(element);
+            });
+            
+
+            // Full Menu Logic
+            const menuData = [
+                { category: "Breads & Breakfast", items: [ { name: "Appam", price: 20 }, { name: "Chappathi", price: 30 }, { name: "Egg Appam", price: 40 }, { name: "Egg Porotta", price: 60 }, { name: "Porotta", price: 30 }, { name: "Egg Dosa", price: 120 }, { name: "Ghee Masala Dosa", price: 130 }, { name: "Ghee Roast", price: 100 }, { name: "Kallappam", price: 40 }, { name: "Kheema Dosa Chicken", price: 240 }, { name: "Kheema Dosa Erachi", price: 250 }, { name: "Kheema Porotta Chicken", price: 240 }, { name: "Kheema Porotta Erachi", price: 250 }, { name: "Masala Dosa", price: 110 }, { name: "Onion Dosa", price: 100 }, { name: "Plain Dosa", price: 70 }, { name: "Poori Baji", price: 120 }, { name: "Puttu", price: 80 }, { name: "Set Dosa", price: 100 } ] },
+                { category: "Biriyani Items", items: [ { name: "Chicken Biriyani", price: 240 }, { name: "Egg Biriyani", price: 180 }, { name: "Prawns Biriyani", price: 390 }, { name: "Erachi Biriyani", price: 290 } ] },
+                { category: "Rice Items", items: [ { name: "Biriyani Rice", price: 120 }, { name: "Ghee Rice", price: 120 }, { name: "Pothichoru Non Veg", price: 250 }, { name: "Pothichoru Veg", price: 200 } ] },
+                { category: "Fish Items (Seasonal)", items: [ { name: "Ayla Curry", price: 200 }, { name: "Ayla Fry", price: 160 }, { name: "Prawns Fry", price: 390 }, { name: "Prawns Roast", price: 390 }, { name: "Squid Fry", price: 340 }, { name: "Squid Roast", price: 340 }, { name: "Natholi Fry", price: 200 } ] },
+                { category: "Egg Items", items: [ { name: "Egg Burji", price: 100 }, { name: "Egg Masala", price: 120 }, { name: "Egg Roast", price: 120 } ] },
+                { category: "Veg Items", items: [ { name: "Kadala Curry", price: 100 }, { name: "Greenpeas Masala", price: 100 }, { name: "Veg Kuruma", price: 110 } ] },
+                { category: "Erachi Items", items: [ { name: "Erachi Curry", price: 250 }, { name: "Erachi Fry", price: 290 }, { name: "Erachi Roast", price: 280 }, { name: "Erachi Chilly", price: 290 }, { name: "Erachi Garlic", price: 290 }, { name: "Erachi Ginger", price: 290 }, { name: "Erachi Manchurian", price: 290 }, { name: "Erachi Pepper Dry", price: 290 }, { name: "Erachi Pepper Roast", price: 290 } ] },
+                { category: "Chicken Items", items: [ { name: "Chicken 65", price: 250 }, { name: "Chicken Curry", price: 200 }, { name: "Pepper Chicken Dry", price: 240 }, { name: "Chicken Roast", price: 240 }, { name: "Chicken Stew", price: 200 }, { name: "Chicken Chilly", price: 250 }, { name: "Chicken Garlic", price: 250 }, { name: "Chicken Ginger", price: 250 }, { name: "Chicken Manchurian", price: 250 } ] },
+                { category: "Kaliyodam Special Items ⭐", items: [ { name: "Erachi Choru", price: 330 }, { name: "Kizhi Porotta Chicken", price: 250 }, { name: "Kizhi Porotta Erachi", price: 350 }, { name: "Kothu Porotta Chicken", price: 300 }, { name: "Kothu Porotta Egg", price: 210 }, { name: "Kothu Porotta Erachi", price: 350 }, { name: "Puttu Biriyani Chicken", price: 250 }, { name: "Puttu Biriyani Erachi", price: 300 }, { name: "Kappa", price: 120 }, { name: "Kappa Biriyani Chicken", price: 250 }, { name: "Kappa Biriyani Erachi", price: 280 } ] },
+                { category: "Fresh Juices", items: [ { name: "Carrot", price: 100 }, { name: "Mosambi", price: 100 }, { name: "Orange", price: 100 }, { name: "Pineapple", price: 100 }, { name: "Watermelon", price: 100 }, { name: "Apple", price: 100 }, { name: "Grape", price: 100 }, { name: "Mango", price: 100 }, { name: "Muskmelon", price: 100 }, { name: "Papaya", price: 100 }, { name: "Pomegranate", price: 100 }, { name: "Solid Juice", price: 190 } ] },
+                { category: "Lime Juices", items: [ { name: "Cucumber Lime", price: 100 }, { name: "Fresh Lime", price: 70 }, { name: "Ginger Lime", price: 100 }, { name: "Mint Lime", price: 100 }, { name: "Orange Lime", price: 100 }, { name: "Pineapple Lime", price: 100 }, { name: "Tender Lime", price: 100 }, { name: "Watermelon Lime", price: 100 }, { name: "Grape Lime", price: 100 } ] },
+                { category: "Milk Shakes", items: [ { name: "Apple", price: 190 }, { name: "Boost", price: 160 }, { name: "Carrot", price: 160 }, { name: "Cashew", price: 190 }, { name: "Chikku", price: 190 }, { name: "Cold Coffee", price: 160 }, { name: "Dark Fantasy", price: 160 }, { name: "Horlicks", price: 160 }, { name: "Jackfruit", price: 190 }, { name: "Kitkat", price: 160 }, { name: "Mango", price: 190 }, { name: "Oreo", price: 160 }, { name: "Pomegranate", price: 160 }, { name: "Sharjah", price: 130 }, { name: "Sitafal", price: 190 }, { name: "Snickers", price: 160 }, { name: "Strawberry", price: 190 }, { name: "Tender Coconut", price: 190 }, { name: "Avocado", price: 190 }, { name: "Dates", price: 190 }, { name: "Galaxy", price: 160 }, { name: "Muskmelon", price: 160 }, { name: "Papaya", price: 190 } ] },
+                { category: "Special Milk Shakes", items: [ { name: "Malabar Shake", price: 210 }, { name: "Mixed Dry Fruits", price: 210 }, { name: "Netbox", price: 190 }, { name: "Fardh", price: 190 }, { name: "Kaliyodam Special Shake", price: 210 } ] },
+                { category: "Ice Cream Shakes", items: [ { name: "Butterscotch", price: 190 }, { name: "Chocolate", price: 190 }, { name: "Mango", price: 190 }, { name: "Pista", price: 190 }, { name: "Strawberry", price: 190 }, { name: "Vanilla", price: 190 } ] },
+                { category: "Avil Milk", items: [ { name: "Avil Milk Classic", price: 110 }, { name: "Avil Milk Boost", price: 190 }, { name: "Avil Milk Dryfruits", price: 190 }, { name: "Avil Milk Horlicks", price: 190 }, { name: "Avil Milk With Icecream", price: 190 } ] },
+                { category: "Healthy Juices", items: [ { name: "ABC Juice", price: 190 }, { name: "Healthy Mint Juice", price: 130 }, { name: "Juice Salvation", price: 210 }, { name: "Rapid Recovery", price: 190 }, { name: "Purple Line", price: 190 } ] },
+                { category: "Falooda & Specials", items: [ { name: "Falooda", price: 210 }, { name: "Fruit Salad Ice-Cream", price: 190 }, { name: "Fruits Salad", price: 130 }, { name: "Kaliyodam Special Falooda", price: 240 } ] },
+                { category: "Sharbat", items: [ { name: "Mohabbat Ka Sharbat", price: 100 }, { name: "Nannari Sharbat", price: 70 } ] },
+                { category: "Lassi", items: [ { name: "Banana", price: 110 }, { name: "Butter Milk", price: 70 }, { name: "Chocolate", price: 110 }, { name: "Dry Fruits", price: 160 }, { name: "Mango", price: 110 }, { name: "Strawberry", price: 110 }, { name: "Sweet", price: 110 } ] },
+                { category: "Puddings", items: [ { name: "Carrot Pudding", price: 150 }, { name: "Chocolate Pudding", price: 150 }, { name: "Coconut Pudding", price: 150 }, { name: "Mango Pudding", price: 150 } ] }
+            ];
+
+            const waveTransition = document.getElementById('wave-transition');
+            const fullMenuPage = document.getElementById('full-menu-page');
+            const btnOpenMenu = document.getElementById('btn-open-menu');
+            const btnCloseMenu = document.getElementById('btn-close-menu');
+            
+            const sidebar = document.getElementById('menu-sidebar');
+            const itemsArea = document.getElementById('menu-items-area');
+            const searchInput = document.getElementById('menu-search');
+
+            const isNonVeg = (name, cat) => {
+                const nnName = name.toLowerCase();
+                const nnCat = cat.toLowerCase();
+                const meatWords = ['chicken', 'erachi', 'beef', 'egg', 'fish', 'prawn', 'squid', 'ayla', 'natholi'];
+                
+                if (meatWords.some(w => nnName.includes(w) || nnCat.includes(w))) return true;
+                if (nnName.includes('pothichoru non veg')) return true;
+                return false;
+            };
+
+            function renderMenu() {
+                sidebar.innerHTML = '';
+                itemsArea.innerHTML = '';
+
+                menuData.forEach((categoryData, index) => {
+                    const tabBtn = document.createElement('button');
+                    tabBtn.className = 'category-tab' + (index === 0 ? ' active' : '');
+                    let cleanedCatName = categoryData.category.replace(' (Seasonal)', '').replace(' ⭐', '');
+                    tabBtn.textContent = cleanedCatName;
+                    tabBtn.onclick = () => showCategory(index);
+                    sidebar.appendChild(tabBtn);
+
+                    const catSection = document.createElement('div');
+                    catSection.className = 'category-section' + (index === 0 ? ' active' : '');
+                    catSection.id = 'category-' + index;
+
+                    let titleHTML = `<h2 class="category-title serif ${categoryData.category.includes('⭐') ? 'special-header' : ''}">`;
+                    titleHTML += cleanedCatName;
+                    if (categoryData.category.includes('⭐')) titleHTML += ' ⭐';
+                    if (categoryData.category.includes('(Seasonal)')) titleHTML += ' <span class="category-badge">Seasonal</span>';
+                    titleHTML += '</h2>';
+                    
+                    let gridHTML = `<div class="menu-items-grid">`;
+                    
+                    categoryData.items.forEach((item, itemIndex) => {
+                        const nonVeg = isNonVeg(item.name, categoryData.category);
+                        const dotColor = nonVeg ? '🔴' : '🟢';
+                        gridHTML += `
+                            <div class="menu-item-row" style="animation-delay: ${(itemIndex % 20) * 0.03}s">
+                                <div class="item-name">
+                                    <span class="item-dot">${dotColor}</span>
+                                    <span>${item.name}</span>
+                                </div>
+                                <div class="item-price">₹${item.price}</div>
+                            </div>
+                        `;
+                    });
+
+                    gridHTML += `</div>`;
+                    catSection.innerHTML = titleHTML + gridHTML;
+                    itemsArea.appendChild(catSection);
+                });
+            }
+
+            function showCategory(index) {
+                document.querySelectorAll('.category-tab').forEach((tab, i) => {
+                    tab.classList.toggle('active', i === index);
+                });
+                document.querySelectorAll('.category-section').forEach((sec, i) => {
+                    sec.classList.toggle('active', i === index);
+                });
+                if(searchInput) searchInput.value = '';
+                filterItems('');
+            }
+
+            function filterItems(query) {
+                const q = query.toLowerCase();
+                const sections = document.querySelectorAll('.category-section');
+                
+                sections.forEach(sec => {
+                    let hasVisibleItems = false;
+                    const items = sec.querySelectorAll('.menu-item-row');
+                    
+                    items.forEach(item => {
+                        const name = item.querySelector('.item-name span:nth-child(2)').textContent.toLowerCase();
+                        if (name.includes(q)) {
+                            item.style.display = 'flex';
+                            hasVisibleItems = true;
+                        } else {
+                            item.style.display = 'none';
+                        }
+                    });
+                    
+                    if (q !== '') {
+                        sec.classList.toggle('active', hasVisibleItems);
+                    }
+                });
+                
+                if (q === '') {
+                    const activeIndex = Array.from(document.querySelectorAll('.category-tab')).findIndex(tab => tab.classList.contains('active'));
+                    document.querySelectorAll('.category-section').forEach((sec, i) => {
+                        sec.classList.toggle('active', i === activeIndex);
+                    });
+                }
+            }
+
+            if (searchInput) searchInput.addEventListener('input', (e) => filterItems(e.target.value));
+
+            renderMenu();
+
+            if (btnOpenMenu) {
+                btnOpenMenu.addEventListener('click', (e) => {
+                    e.preventDefault();
+                    document.body.style.overflow = 'hidden'; 
+                    waveTransition.classList.remove('wave-recede');
+                    waveTransition.classList.add('wave-up');
+                    
+                    setTimeout(() => {
+                        fullMenuPage.style.opacity = '1';
+                        fullMenuPage.style.visibility = 'visible';
+                        waveTransition.classList.remove('wave-up');
+                        waveTransition.classList.add('wave-recede');
+                    }, 600);
+                });
+            }
+
+            if (btnCloseMenu) {
+                btnCloseMenu.addEventListener('click', () => {
+                    waveTransition.classList.remove('wave-recede');
+                    waveTransition.classList.add('wave-up');
+                    
+                    setTimeout(() => {
+                        fullMenuPage.style.opacity = '0';
+                        fullMenuPage.style.visibility = 'hidden';
+                        document.body.style.overflow = '';
+                        waveTransition.classList.remove('wave-up');
+                    }, 600);
+                });
+            }
+
+            // Fire scroll event once on load to ensure early elements are visible
+            window.dispatchEvent(new Event('scroll'));
+        });
+    </script>
+
+    <!-- Wave Transition Element -->
+    <div class="wave-transition" id="wave-transition"></div>
+
+    <!-- Full Menu Page Overlay -->
+    <div class="full-menu-page" id="full-menu-page">
+        <div class="full-menu-topbar">
+            <div class="full-menu-brand">Kaliyodam 🛖</div>
+            <div class="full-menu-search-container">
+                <input type="text" class="full-menu-search" id="menu-search" placeholder="Search for dishes..." autocomplete="off">
+            </div>
+            <button class="btn-back" id="btn-close-menu">← Back to Home</button>
+        </div>
+        
+        <div class="full-menu-content">
+            <div class="full-menu-sidebar" id="menu-sidebar">
+                <!-- Dynamically populated tabs -->
+            </div>
+            
+            <div class="full-menu-items-area" id="menu-items-area">
+                <!-- Dynamically populated categories and items -->
+            </div>
+        </div>
+    </div>
+</body>
+</html>
